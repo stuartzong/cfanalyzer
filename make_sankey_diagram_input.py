@@ -263,14 +263,18 @@ def __main__():
     print "Generating patient_files dictionary!"
     args = parse_args()
     meta_file = args.meta_file
-    template_dir = '/home/szong/projects/development/expands/'
+    template_dir = '/home/szong/projects/development/cfanalyzer/'
     input_headers = HEADER.INPUT_FILE_HEADER
     patient_files = get_files(meta_file, input_headers)
     pprint(patient_files)
-    biopsy_time_points = ['diagnosis', 'biop1', 'biop2']
+    # biopsy_time_points = ['diagnosis', 'biop1', 'biop2']
+    # biopsy_time_points = ['tumour', 'cell_line', 'xenograft']
+    biopsy_time_points = ['Dx_tr', 'Dx_untr', 'relapse']
+    print("xxxxxxx")
     sankey_files = make_sankey_input_file(patient_files,
                                           template_dir,
                                           biopsy_time_points)
+    print("yyyyyyyyyy")
     for sankey_file in sankey_files:
         new_sankey = '.'.join([sankey_file, 'modified'])
         modify_sankey(sankey_file,  new_sankey)
